@@ -17,21 +17,10 @@ public class DotChaser {
     public boolean isTypeB;
   }
 
-  private static class ThingNode {
-    public Thing data;
-    public ThingNode next;
-
-    public ThingNode(Thing thing) {
-      this.data = thing;
-      this.next = null;
-    }
-
-    public String toString() {
-      return this.data.row + " " + this.data.col + " " + this.data.lab;
-    }
-  }
-
   /**
+   * YOU'LL NEED TO PUT THIS SOMEWHERE ELSE
+   * HINT: WOULDN'T IT BE NICE TO HAVE A LIST OR QUEUE SO THAT
+   *       WE DON'T HAVE TO USE NODES HERE?
    * This class is for linked lists of Thing's
    */
   public static class ThingList {
