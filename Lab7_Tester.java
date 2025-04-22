@@ -5,52 +5,64 @@ import java.io.*;
 
 public class Lab7_Tester {
 
-  private boolean checkInFile(String filename, String phrase){
+  private boolean checkInFile(String filename, String phrase) {
+    Scanner scanner = null;
     try {
       File file = new File("./" + filename);
-      Scanner scanner = new Scanner(file);
-      while (scanner.hasNextLine()){
+      scanner = new Scanner(file);
+      while (scanner.hasNextLine()) {
         String line = scanner.nextLine();
-        line = line.replaceAll("\\s+","") ;
-        phrase = phrase.replaceAll("\\s+","") ;
+        line = line.replaceAll("\\s+", "");
+        phrase = phrase.replaceAll("\\s+", "");
         if (line.contains(phrase))
           return true;
       }
-    } catch(Exception e){
+    } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      if (scanner != null)
+        scanner.close();
     }
     return false;
   }
 
-  private boolean checkNotInFile(String filename, String phrase){
+  private boolean checkNotInFile(String filename, String phrase) {
+    Scanner scanner = null;
     try {
       File file = new File("./" + filename);
-      Scanner scanner = new Scanner(file);
-      while (scanner.hasNextLine()){
+      scanner = new Scanner(file);
+      while (scanner.hasNextLine()) {
         String line = scanner.nextLine();
-        line = line.replaceAll("\\s+","") ;
-        phrase = phrase.replaceAll("\\s+","") ;
+        line = line.replaceAll("\\s+", "");
+        phrase = phrase.replaceAll("\\s+", "");
         if (line.contains(phrase))
           return false;
       }
-    } catch(Exception e){
+    } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      if (scanner != null)
+        scanner.close();
     }
     return true;
   }
 
-    private boolean checkNoStatic(String filename){
+  private boolean checkNoStatic(String filename) {
+    Scanner scanner = null;
     try {
       File file = new File("./" + filename);
-      Scanner scanner = new Scanner(file);
-      while (scanner.hasNextLine()){
+      scanner = new Scanner(file);
+      while (scanner.hasNextLine()) {
         String line = scanner.nextLine();
-        line = line.replaceAll("\\s+","") ;
+        line = line.replaceAll("\\s+", "");
         if (line.contains("static") && !line.contains("publicstaticvoidmain"))
           return false;
       }
-    } catch(Exception e){
+    } catch (Exception e) {
       e.printStackTrace();
+    } finally {
+      if (scanner != null)
+        scanner.close();
     }
     return true;
   }
@@ -125,30 +137,40 @@ public class Lab7_Tester {
 
   @Test
   public void test8() {
-    System.out.println("TypeA and TypeB contain the minimum number of fields necessary (declare each on a new line), utilizing good OOP");
+    System.out.println(
+        "TypeA and TypeB contain the minimum number of fields necessary (declare each on a new line), utilizing good OOP");
     System.out.println("the `Thing` class contains the appropriate fields, utilizing good OOP");
     boolean found_row = checkInFile("Thing.java", "protected int row") || checkInFile("Thing.java", "private int row");
     boolean found_col = checkInFile("Thing.java", "protected int col") || checkInFile("Thing.java", "private int col");
     boolean found_dir = checkInFile("Thing.java", "protected int dir") || checkInFile("Thing.java", "private int dir");
-    boolean found_lab = checkInFile("Thing.java", "protected char lab") || checkInFile("Thing.java", "private char lab");
+    boolean found_lab = checkInFile("Thing.java", "protected char lab")
+        || checkInFile("Thing.java", "private char lab");
     assertEquals(true, found_row);
     assertEquals(true, found_col);
     assertEquals(true, found_dir);
     assertEquals(true, found_lab);
 
-    boolean not_found_row = checkNotInFile("TypeA.java", "protected int row") && checkNotInFile("TypeA.java", "private int row") && checkNotInFile("TypeA.java", "public int row");
-    boolean not_found_col = checkNotInFile("TypeA.java", "protected int col") && checkNotInFile("TypeA.java", "private int col") && checkNotInFile("TypeA.java", "public int col");
-    boolean not_found_dir = checkNotInFile("TypeA.java", "protected int dir") && checkNotInFile("TypeA.java", "private int dir") && checkNotInFile("TypeA.java", "public int dir");
-    boolean not_found_lab = checkNotInFile("TypeA.java", "protected char lab") && checkNotInFile("TypeA.java", "private char lab") && checkNotInFile("TypeA.java", "public char lab");
+    boolean not_found_row = checkNotInFile("TypeA.java", "protected int row")
+        && checkNotInFile("TypeA.java", "private int row") && checkNotInFile("TypeA.java", "public int row");
+    boolean not_found_col = checkNotInFile("TypeA.java", "protected int col")
+        && checkNotInFile("TypeA.java", "private int col") && checkNotInFile("TypeA.java", "public int col");
+    boolean not_found_dir = checkNotInFile("TypeA.java", "protected int dir")
+        && checkNotInFile("TypeA.java", "private int dir") && checkNotInFile("TypeA.java", "public int dir");
+    boolean not_found_lab = checkNotInFile("TypeA.java", "protected char lab")
+        && checkNotInFile("TypeA.java", "private char lab") && checkNotInFile("TypeA.java", "public char lab");
     assertEquals(true, not_found_row);
     assertEquals(true, not_found_col);
     assertEquals(true, not_found_dir);
     assertEquals(true, not_found_lab);
 
-    not_found_row = checkNotInFile("TypeB.java", "protected int row") && checkNotInFile("TypeB.java", "private int row") && checkNotInFile("TypeB.java", "public int row");
-    not_found_col = checkNotInFile("TypeB.java", "protected int col") && checkNotInFile("TypeB.java", "private int col") && checkNotInFile("TypeB.java", "public int col");
-    not_found_dir = checkNotInFile("TypeB.java", "protected int dir") && checkNotInFile("TypeB.java", "private int dir") && checkNotInFile("TypeB.java", "public int dir");
-    not_found_lab = checkNotInFile("TypeB.java", "protected char lab") && checkNotInFile("TypeB.java", "private char lab") && checkNotInFile("TypeB.java", "public char lab");
+    not_found_row = checkNotInFile("TypeB.java", "protected int row") && checkNotInFile("TypeB.java", "private int row")
+        && checkNotInFile("TypeB.java", "public int row");
+    not_found_col = checkNotInFile("TypeB.java", "protected int col") && checkNotInFile("TypeB.java", "private int col")
+        && checkNotInFile("TypeB.java", "public int col");
+    not_found_dir = checkNotInFile("TypeB.java", "protected int dir") && checkNotInFile("TypeB.java", "private int dir")
+        && checkNotInFile("TypeB.java", "public int dir");
+    not_found_lab = checkNotInFile("TypeB.java", "protected char lab")
+        && checkNotInFile("TypeB.java", "private char lab") && checkNotInFile("TypeB.java", "public char lab");
     assertEquals(true, not_found_row);
     assertEquals(true, not_found_col);
     assertEquals(true, not_found_dir);
