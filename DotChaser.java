@@ -23,9 +23,14 @@ public class DotChaser {
         Thing tA = new TypeA(45, 50);
         list.addThing(tA);
 
-        // Add a typeB thing to the list
+        // New typeB thing
         Thing tB = new TypeB(55, 50);
         list.addThing(tB);
+        
+        // New typeC thing
+        Thing tC = new TypeC(35, 60);
+        list.addThing(tC);
+
       }
       list.printAll();
       list.moveAll(rand);
