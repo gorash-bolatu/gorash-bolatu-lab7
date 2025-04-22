@@ -1,0 +1,59 @@
+commit 1cbe9ec1ade10395db0197815c090d1e92259ce8
+Author: gorash-bolatu <cotwi10@yandex.ru>
+Date:   Tue Apr 22 15:36:04 2025 +0800
+
+    Recomplied
+
+commit c3b6ad4fc66dc70fe5e3e2874f60d24ec3a8e4df
+Author: gorash-bolatu <cotwi10@yandex.ru>
+Date:   Tue Apr 22 15:24:43 2025 +0800
+
+    Added TypeC
+
+commit e600e3d4277ae74a3a539d2160856b9376d5604b
+Author: gorash-bolatu <cotwi10@yandex.ru>
+Date:   Tue Apr 22 15:24:36 2025 +0800
+
+    New class
+
+commit 2438aabe9389734b01a98ffb600f3a7537e66db8
+Author: gorash-bolatu <cotwi10@yandex.ru>
+Date:   Tue Apr 22 14:52:50 2025 +0800
+
+    Moved everything except `main()` and `rand` to other classes
+
+commit 52c86e3262cc1a1fc8fae0174119584fdf2ae4ca
+Author: gorash-bolatu <cotwi10@yandex.ru>
+Date:   Tue Apr 22 14:52:17 2025 +0800
+
+    New classes
+
+commit d3826362ad080e63f210de853163a4dc9ad1dba7
+Author: gorash-bolatu <cotwi10@yandex.ru>
+Date:   Tue Apr 22 14:51:58 2025 +0800
+
+    Reworked into new classes, deleted old compiled files
+
+commit 8602aaf3c9dcd79393bc02ce6f9f84d194257c5b
+Author: gorash-bolatu <cotwi10@yandex.ru>
+Date:   Tue Apr 22 13:36:03 2025 +0800
+
+    Reworked Node, added ThingList
+
+commit b27403133d61cffea64b2934ececc3c568b35a62
+Author: gorash-bolatu <cotwi10@yandex.ru>
+Date:   Tue Apr 22 12:18:32 2025 +0800
+
+    fixed resource leak with 'scanner'
+
+commit 907c059e180158d4cf7d375f139748546d1ce183
+Author: gorash-bolatu <cotwi10@yandex.ru>
+Date:   Tue Apr 22 01:17:27 2025 +0800
+
+    compiled
+
+commit 332d0f3764751fbeb55069fe6f8872eb45fff482
+Author: gorash-bolatu <cotwi10@yandex.ru>
+Date:   Tue Apr 22 01:08:32 2025 +0800
+
+    unpacked from zip
