@@ -6,28 +6,65 @@ public class DotChaser {
   /**
    * A "Thing" moves in a grid world. A TypeA Thing randomly
    * decides to turn left or right (or not turn) every "round",
-   * and, afterward, takes a step forward.  A TypeB Thing
+   * and, afterward, takes a step forward. A TypeB Thing
    * only considers making a random turn every 10th round.
-   *
-   * A STATIC CLASS? OH NO! GET IT OUT OF HERE!
    */
   public static class Thing {
     // dir: 0=North, 1=East, 2=South, 3=West.
     // timeSinceLast: this is only important for "TypeB" Things.
-    public int  row, col, dir, timeSinceLast;
+    public int row, col, dir, timeSinceLast;
     public char lab = 'r';
     public boolean isTypeB;
   }
 
+  private static class ThingNode {
+    public Thing data;
+    public ThingNode next;
+
+    public ThingNode(Thing thing) {
+      this.data = thing;
+      this.next = null;
+    }
+
+    public String toString() {
+      return this.data.row + " " + this.data.col + " " + this.data.lab;
+    }
+  }
+
   /**
-   * YOU'LL NEED TO PUT THIS SOMEWHERE ELSE
-   * HINT: WOULDN'T IT BE NICE TO HAVE A LIST OR QUEUE SO THAT
-   *       WE DON'T HAVE TO USE NODES HERE?
    * This class is for linked lists of Thing's
    */
-  public static class Node {
-    public Thing data;
-    public Node  next;
+  public static class ThingList {
+    private ThingNode head;
+
+    public ThingList() {
+      this.head = null;
+    }
+
+    public void add(Thing thing) {
+      if (this.head != null) {
+        ThingNode link = head;
+        while (link.next != null)
+          link = link.next;
+        link.next = new ThingNode(thing);
+      } else {
+        this.head = new ThingNode(thing);
+      }
+    }
+
+    public void printAll() {
+      for (ThingNode T = head; T != null; T = T.next)
+        System.out.println(T.toString());
+      System.out.println("done");
+      System.out.flush();
+    }
+
+    public void moveAll() {
+      for (ThingNode T = head; T != null; T = T.next) {
+        maybeTurn(T.data);
+        step(T.data);
+      }
+    }
   }
 
   // EEEEEK! STATIC METHODS!!! PLEASE FIND THEM A BETTER HOME.
@@ -56,7 +93,7 @@ public class DotChaser {
           leftTurn(t);
         }
       }
-    } else   {
+    } else {
       if (i == 1) {
         rightTurn(t);
       }
@@ -69,69 +106,46 @@ public class DotChaser {
 
   public static void step(Thing t) {
     final int[] dc = {
-      0, 1, 0, -1
+        0, 1, 0, -1
     }, dr = {
-      1, 0, -1, 0
+        1, 0, -1, 0
     };
     t.row += dr[t.dir];
     t.col += dc[t.dir];
   }
 
-  
   /**
    * This static method is ok :)
    */
   public static void main(String[] args) {
     int N = 200;
 
-    if( args.length != 0 )
+    if (args.length != 0)
       N = Integer.parseInt(args[0]);
 
-    // INSTEAD OF A NODE, CREATE SOMETHING MORE USER-FRIENDLY.
-    Node L = null;
+    ThingList list = new ThingList();
     int count = 0;
 
-    while( true ) {
+    while (true) {
       // Every N rounds, add another typeA and typeB Thing.
-      if( count % N == 0 ) {
+      if (count % N == 0) {
 
         // Add a typeA thing to the list.
         // (GEE, THAT'S A LOT OF CODE FOR JUST CREATING ONE THING)
         Thing tA = new Thing();
         tA.row = 45;
         tA.col = 50;
-        Node nA = new Node();
-        nA.data = tA;
-        nA.next = L;
-        L       = nA;
+        list.add(tA);
 
         // Add a typeB thing to the list
         Thing tB = new Thing();
-        tB.row     = 55;
-        tB.col     = 50;
-        tB.lab     = 'b';
+        tB.row = 55;
+        tB.col = 50;
+        tB.lab = 'b';
         tB.isTypeB = true;
-        Node nB = new Node();
-        nB.data = tB;
-        nB.next = L;
-        L       = nB;
+        list.add(tB);
       }
 
-      // Print out each thing.
-      // (SEEMS LIKE A NICE PRINTALL() METHOD CALL WOULD WORK HERE)
-      // (SEEMS LIKE A toString() METHOD IN THE CLASS WOULD ALSO BE NICE)
-      for( Node T = L; T != null; T = T.next )
-        System.out.println(T.data.row + " " + T.data.col + " " + T.data.lab);
-
-      System.out.println("done");
-      System.out.flush();
-
-      // Move each thing.
-      // (SEEMS LIKE A NICE MOVEALL() METHOD CALL WOULD WORK HERE)
-      for( Node T = L; T != null; T = T.next ) {
-        maybeTurn(T.data);
-        step(T.data);
-      }
       count++;
     }
   }
